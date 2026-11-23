@@ -1,155 +1,67 @@
 <!doctype html>
-<html lang="uk">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f7f8fc">
-<title>NewsDesk — робоча панель</title>
+<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f6fb"><title>NewsDesk</title>
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--ink:#202638;--muted:#7b8498;--line:#e8ebf2;--accent:#5968d9;--accent-soft:#eef0ff;--green:#168653;--green-bg:#e9f8f0;--shadow:0 8px 30px rgba(31,43,80,.055)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:34px 26px 60px}
-header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:30px}.brand{display:flex;align-items:center;gap:13px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#6574e8,#8994f4);display:grid;place-items:center;color:#fff;font-size:21px;box-shadow:0 7px 16px #6574e833}.brand h1{font-size:22px;letter-spacing:-.6px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.header-actions{display:flex;gap:9px;align-items:center}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:11px;font-weight:600;font-size:13px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.statusline{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin:0 0 18px}.dot{width:8px;height:8px;border-radius:50%;background:#aab1c1}.dot.live{background:#20a36b;box-shadow:0 0 0 4px #20a36b1a}
-.hero{background:linear-gradient(110deg,#fff 0%,#f0f2ff 100%);border:1px solid #e8eafd;border-radius:20px;padding:22px 24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:20px}.hero h2{font-size:20px;margin:0 0 5px;letter-spacing:-.4px}.hero p{margin:0;color:var(--muted);font-size:13px}.stats{display:flex;gap:22px}.stat strong{display:block;font-size:23px;letter-spacing:-.7px}.stat span{font-size:11px;color:var(--muted)}
-.toolbar{display:flex;align-items:center;gap:10px;margin:20px 0 22px;flex-wrap:wrap}.search{flex:1;min-width:210px;position:relative}.search input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 14px 11px 39px;background:#fff;outline:none}.search:before{content:"⌕";position:absolute;left:14px;top:7px;font-size:22px;color:#8b93a6}.search input:focus,.field:focus{border-color:#9ba4f0;box-shadow:0 0 0 3px #5968d918}
-.filter{border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:11px;color:#515b70;font-size:13px}
-.group{margin:24px 0}.group-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}.group-title{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:750}.group-title .ico{width:29px;height:29px;border-radius:9px;background:#eef0ff;display:grid;place-items:center;color:var(--accent);font-size:14px}.count{font-size:11px;color:var(--muted);font-weight:500}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
-.source{position:relative;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px 13px;min-height:77px;box-shadow:0 2px 8px rgba(30,40,70,.018);transition:.18s}.source:hover{border-color:#cdd2f5;transform:translateY(-1px);box-shadow:var(--shadow)}.source.new{border-color:#8bd4ad;background:linear-gradient(110deg,#fff 65%,#f0fbf5);box-shadow:0 0 0 3px #21a36612}.source.new .source-icon{background:var(--green-bg);color:var(--green)}.source-icon{width:38px;height:38px;flex:0 0 38px;border-radius:11px;background:#f1f3f8;color:#667087;display:grid;place-items:center;font-weight:800;font-size:13px}.source-info{min-width:0;flex:1}.source-name{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.source-meta{font-size:11px;color:var(--muted);margin-top:3px}.pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:750;padding:4px 7px;border-radius:20px;background:#f1f3f7;color:#798196;white-space:nowrap}.pill.new{background:var(--green-bg);color:var(--green)}.source-actions{display:flex;gap:5px;align-items:center}.iconbtn{border:0;background:transparent;color:#8b93a5;border-radius:8px;width:28px;height:28px;font-size:15px}.iconbtn:hover{background:#f0f2f8;color:var(--ink)}.source-link{position:absolute;inset:0;z-index:1}.source-actions,.source-actions button{position:relative;z-index:2}
-.empty{padding:28px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:15px;font-size:13px}
-.note{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 17px;color:var(--muted);font-size:12px}.note strong{color:#49536a}.note ul{margin:8px 0 0;padding-left:18px}.note li{margin:4px 0}
-dialog{border:0;border-radius:18px;padding:0;width:min(480px,calc(100% - 28px));box-shadow:0 25px 80px #1b234433}dialog::backdrop{background:#1e274566;backdrop-filter:blur(3px)}.modal{padding:23px}.modal h3{margin:0 0 17px;font-size:18px}.fieldrow{margin:12px 0}.fieldrow label{display:block;font-size:12px;font-weight:700;color:#626c80;margin-bottom:6px}.field{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;outline:none;background:#fff}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.hint{font-size:11px;color:var(--muted);margin-top:5px}
-@media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{align-items:flex-start;flex-direction:column}.stats{gap:28px}}
-@media(max-width:560px){.wrap{padding:22px 14px 40px}header{align-items:flex-start}.brand h1{font-size:19px}.header-actions .btn span{display:none}.cards{grid-template-columns:1fr}.source{min-height:70px}.hero{padding:18px}.stats{width:100%;justify-content:space-between}.toolbar{gap:7px}.filter{flex:1}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<header>
- <div class="brand"><div class="logo">N</div><div><h1>NewsDesk</h1><p>Твій особистий центр моніторингу новин</p></div></div>
- <div class="header-actions"><button class="btn" id="checkBtn">↻ <span>Перевірити</span></button><button class="btn primary" id="addBtn">＋ <span>Додати джерело</span></button></div>
-</header>
-<div class="statusline"><span class="dot" id="liveDot"></span><span id="lastCheck">Моніторинг RSS · інтервал перевірки 1 хв</span><span style="margin-left:auto" id="monitorCount">RSS: 18 джерел</span></div>
-<section class="hero">
- <div><h2>Усі важливі джерела — в одному місці</h2><p>Швидкий доступ до медіа та офіційних сторінок західних областей</p></div>
- <div class="stats"><div class="stat"><strong id="totalCount">32</strong><span>джерел</span></div><div class="stat"><strong id="newCount">0</strong><span>нових оновлень</span></div><div class="stat"><strong>60 с</strong><span>інтервал перевірки</span></div></div>
-</section>
-<div class="toolbar">
- <div class="search"><input id="search" placeholder="Знайти джерело..." autocomplete="off"></div>
- <select class="filter" id="filter"><option value="all">Усі категорії</option><option value="Медіа">Медіа</option><option value="Львівщина">Львівщина</option><option value="Західні області">Західні області</option><option value="Telegram">Telegram</option></select>
- <select class="filter" id="sort"><option value="default">За категоріями</option><option value="new">Спочатку нові</option><option value="name">За назвою</option></select>
+:root{--bg:#f5f6fb;--ink:#202638;--muted:#788196;--line:#e7eaf2;--accent:#5968d9;--green:#168653;--red:#b54747}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1200px;margin:auto;padding:26px 20px 50px}header,.brand,.hero,.tabs,.tools,.source,.item,.row{display:flex;gap:12px;align-items:center}
+header{justify-content:space-between;margin-bottom:18px}.brand{gap:12px}.logo{background:linear-gradient(145deg,#6875e8,#8994f4);color:#fff;padding:10px 14px;border-radius:12px;font-weight:800;font-size:18px}.brand h1{margin:0;font-size:22px}.brand small,.muted,.meta{color:var(--muted)}
+button,input,select{font:inherit}.btn,.tab,.small{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer;color:var(--ink)}.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn.danger{color:var(--red);border-color:#f0dada}.btn:disabled{opacity:.5;cursor:wait}
+.monitor{display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px;margin:0 0 15px}.dot{width:8px;height:8px;border-radius:50%;background:#20a36b;display:inline-block}
+.hero{justify-content:space-between;background:linear-gradient(110deg,#fff,#eef0ff);padding:18px 20px;border-radius:17px;border:1px solid #e7eaff}.hero h2{margin:0 0 4px;font-size:19px}.stats{display:flex;gap:22px}.stats b{display:block;font-size:21px}.stats small{color:var(--muted)}
+.tabs{margin:20px 0 12px;flex-wrap:wrap}.tab.active{background:#eef0ff;color:#4c59c8;border-color:#dfe2ff}.tools{margin-bottom:12px;flex-wrap:wrap}.tools input{flex:1;min-width:180px}.tools input,.tools select{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--ink)}
+.toolbar-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.feed,.grid{display:grid;gap:9px}.item,.source{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px}.item{align-items:flex-start}.item.unread{border-left:4px solid #20a36a}.body{flex:1;min-width:0}.body h3{font-size:14px;margin:3px 0;overflow-wrap:anywhere}.body p{font-size:12px;color:var(--muted);margin:0 0 7px;overflow-wrap:anywhere}.body a{font-size:12px;color:var(--accent);text-decoration:none}.meta{font-size:11px}.item-actions{display:flex;gap:5px;flex-wrap:wrap}.small{padding:6px 9px}.source{justify-content:space-between}.source .info{flex:1;min-width:0}.source small{display:block;color:var(--muted);overflow-wrap:anywhere}.badge{font-size:10px;background:#f0f2f6;border-radius:20px;padding:4px 7px;white-space:nowrap}.ok{color:var(--green);background:#e9f8f0}.err{color:var(--red);background:#fff0f0}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.empty{padding:35px;background:#fff;border:1px dashed var(--line);border-radius:13px;text-align:center;color:var(--muted)}
+dialog{border:0;border-radius:18px;padding:0;width:min(520px,calc(100% - 24px));box-shadow:0 24px 80px #1b234433}dialog::backdrop{background:#1e274566;backdrop-filter:blur(3px)}.modal{padding:22px}.modal h3{margin:0 0 15px}.fieldrow{margin:11px 0}.fieldrow label{display:block;font-size:12px;font-weight:700;color:#626c80;margin-bottom:5px}.field{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink)}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.hint{font-size:11px;color:var(--muted)}.checkbox{display:flex;gap:8px;align-items:center;font-size:12px;margin-top:10px}
+@media(max-width:720px){.wrap{padding:16px 12px}.hero{display:block}.stats{margin-top:15px;justify-content:space-between}.grid{grid-template-columns:1fr}.tools input{width:100%}.hero{align-items:flex-start}.item{flex-wrap:wrap}.item-actions{margin-left:auto}}
+</style></head><body><div class="wrap">
+<header><div class="brand"><div class="logo">N</div><div><h1>NewsDesk</h1><small>Моніторинг відкритих джерел</small></div></div><button class="btn" id="check">↻ Перевірити зараз</button></header>
+<div class="monitor"><span class="dot"></span><span id="lastCheck">Завантаження статусу моніторингу…</span><span id="monitorCount"></span></div>
+<section class="hero"><div><h2>Твоя редакційна панель</h2><div class="muted">Нові публікації та швидкий доступ до першоджерел</div></div><div class="stats"><div><b id="sn">—</b><small>джерел</small></div><div><b id="un">—</b><small>непрочитаних</small></div><div><b id="savedCount">—</b><small>збережених</small></div></div></section>
+<nav class="tabs"><button class="tab active" data-tab="feed">Стрічка</button><button class="tab" data-tab="sources">Джерела</button><button class="tab" data-tab="saved">Збережене</button></nav>
+<div class="tools"><input id="q" placeholder="Пошук новин або джерел"><select id="cat"><option value="">Усі категорії</option><option>Telegram</option><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Facebook</option><option>Інше</option></select></div>
+<div id="view"><div class="empty">Завантаження…</div></div>
+<p class="muted" style="font-size:11px;margin-top:20px">Cron запускається щохвилини. Час останньої перевірки та кількість джерел показані за фактичним завершеним проходом Worker. Facebook наразі працює як швидке посилання.</p>
 </div>
-<main id="content"></main>
-<div class="note"><strong>Як працює підсвічування?</strong><ul><li>Зелене підсвічування з’являється, коли RSS-стрічка джерела повідомляє про нову публікацію.</li><li>RSS-моніторинг налаштований для ZAXID.NET та 17 Telegram-каналів через RSSHub. Доступність кожного каналу залежить від того, чи доступна його публічна вебстрічка. Публічний RSSHub може кешувати дані кілька хвилин, тому перевірка інтерфейсу щохвилини не гарантує появу кожного допису саме за 60 секунд.</li><li>Facebook-сторінки збережені як швидкі посилання. Автоматичне читання дописів Facebook потребує окремої інтеграції Meta. Якщо канал Telegram не віддає публічну вебстрічку, його посилання все одно залишиться доступним для відкриття.</li></ul></div>
-</div>
-<dialog id="editor"><form class="modal" id="sourceForm">
-<h3 id="modalTitle">Додати джерело</h3>
-<div class="fieldrow"><label for="name">Назва</label><input class="field" id="name" required placeholder="Наприклад, Суспільне Львів"></div>
-<div class="fieldrow"><label for="url">Посилання</label><input class="field" id="url" type="url" required placeholder="https://..."></div>
-<div class="fieldrow"><label for="category">Категорія</label><select class="field" id="category"><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Telegram</option><option>Інше</option></select></div>
-<div class="fieldrow"><label for="rss">RSS-посилання (необов’язково)</label><input class="field" id="rss" type="url" placeholder="https://.../rss.xml"><div class="hint">Якщо джерело має RSS, встав його адресу — NewsDesk перевірятиме нові публікації.</div></div>
-<div class="modal-actions"><button type="button" class="btn" id="cancelBtn">Скасувати</button><button class="btn primary" type="submit">Зберегти</button></div>
-</form></dialog>
+<dialog id="sourceDialog"><form class="modal" id="sourceForm"><h3 id="sourceTitle">Додати джерело</h3>
+<div class="fieldrow"><label for="sName">Назва</label><input class="field" id="sName" required></div>
+<div class="fieldrow"><label for="sUrl">Посилання</label><input class="field" id="sUrl" type="url" placeholder="https://…" required></div>
+<div class="fieldrow"><label for="sCategory">Категорія</label><input class="field" id="sCategory" list="categories" required placeholder="Наприклад, Львівщина"><datalist id="categories"><option>Telegram</option><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Facebook</option><option>Інше</option></datalist></div>
+<div class="fieldrow"><label for="sType">Тип джерела</label><select class="field" id="sType"><option value="rss">RSS / сайт</option><option value="telegram">Telegram</option><option value="link">Лише посилання</option></select></div>
+<div class="fieldrow" id="handleRow"><label for="sHandle">Telegram username</label><input class="field" id="sHandle" placeholder="@channel_name"></div>
+<div class="fieldrow" id="feedRow"><label for="sFeed">RSS URL (необов’язково)</label><input class="field" id="sFeed" type="url" placeholder="https://…/rss.xml"><div class="hint">Якщо сайт не знаходить RSS автоматично, встав точну адресу стрічки.</div></div>
+<label class="checkbox"><input type="checkbox" id="sEnabled" checked> Увімкнути моніторинг (для RSS / Telegram)</label>
+<div class="modal-actions"><button type="button" class="btn" id="cancelSource">Скасувати</button><button class="btn primary" type="submit">Зберегти</button></div></form></dialog>
 <script>
-const defaults=[
-{id:"zaxid",name:"ZAXID.NET",url:"https://zaxid.net/",category:"Медіа",rss:"https://zaxid.net/rss/lviv_news.xml"},
-{id:"nta",name:"NTA",url:"https://nta.ua/",category:"Медіа"},
-{id:"city",name:"Львівська міська рада",url:"https://city-adm.lviv.ua/news/",category:"Львівщина"},
-{id:"lvivmedia",name:"Львів Медіа",url:"https://lviv.media/",category:"Медіа"},
-{id:"suspilne",name:"Суспільне",url:"https://suspilne.media/",category:"Медіа"},
-{id:"dsns",name:"ДСНС Львівщини",url:"https://www.facebook.com/LVIVDSNS",category:"Львівщина"},
-{id:"prok-lviv",name:"Львівська обласна прокуратура",url:"https://www.facebook.com/lviv.gp.gov.ua?locale=uk_UA",category:"Львівщина"},
-{id:"police-lviv",name:"Поліція Львівської області",url:"https://www.facebook.com/police.lviv.region?locale=uk_UA",category:"Львівщина"},
-{id:"police-zak",name:"Поліція Закарпаття",url:"https://www.facebook.com/UA.ZakarpattyaPolice?locale=uk_UA",category:"Західні області"},
-{id:"prok-zak",name:"Закарпатська обласна прокуратура",url:"https://www.facebook.com/zakprokuratura?locale=uk_UA",category:"Західні області"},
-{id:"fb-100070918698861",name:"Офіційна сторінка Facebook · 100070918698861",url:"https://www.facebook.com/profile.php?id=100070918698861&locale=uk_UA",category:"Західні області"},
-{id:"police-rivne",name:"Поліція Рівненщини",url:"https://www.facebook.com/police.in.Rivne.region",category:"Західні області"},
-{id:"police-tern",name:"Поліція Тернопільщини",url:"https://www.facebook.com/gynp.ternopil",category:"Західні області"},
-{id:"fb-100064561967246",name:"Офіційна сторінка Facebook · 100064561967246",url:"https://www.facebook.com/profile.php?id=100064561967246",category:"Західні області"},
-{id:"customs",name:"Львівська митниця",url:"https://www.facebook.com/LVcustomsUA",category:"Львівщина"}
-,
-{id:"tg-lvivych",name:"@lvivych_news",url:"https://t.me/lvivych_news",category:"Telegram",rss:"https://rsshub.app/telegram/channel/lvivych_news"},
-{id:"tg-lviv-lmbrg",name:"@lviv_lmbrg",url:"https://t.me/lviv_lmbrg",category:"Telegram",rss:"https://rsshub.app/telegram/channel/lviv_lmbrg"},
-{id:"tg-lv1256",name:"@Lv1256",url:"https://t.me/Lv1256",category:"Telegram",rss:"https://rsshub.app/telegram/channel/Lv1256"},
-{id:"tg-kozytskyy",name:"Максим Козицький · Telegram",url:"https://t.me/kozytskyy_maksym_official",category:"Telegram",rss:"https://rsshub.app/telegram/channel/kozytskyy_maksym_official"},
-{id:"tg-people",name:"People of Action",url:"https://t.me/people_of_action",category:"Telegram",rss:"https://rsshub.app/telegram/channel/people_of_action"},
-{id:"tg-zelensky",name:"Володимир Зеленський",url:"https://t.me/V_Zelenskiy_official",category:"Telegram",rss:"https://rsshub.app/telegram/channel/V_Zelenskiy_official"},
-{id:"tg-koval",name:"Олександр Коваль",url:"https://t.me/oleksandrkoval_rv",category:"Telegram",rss:"https://rsshub.app/telegram/channel/oleksandrkoval_rv"},
-{id:"tg-zinkevich",name:"Ігор Зінкевич",url:"https://t.me/zinkevich_igor",category:"Telegram",rss:"https://rsshub.app/telegram/channel/zinkevich_igor"},
-{id:"tg-lviv-adm",name:"Львівська міська рада · Telegram",url:"https://t.me/lviv_adm",category:"Telegram",rss:"https://rsshub.app/telegram/channel/lviv_adm"},
-{id:"tg-cpd",name:"Центр протидії дезінформації",url:"https://t.me/CenterCounteringDisinformation",category:"Telegram",rss:"https://rsshub.app/telegram/channel/CenterCounteringDisinformation"},
-{id:"tg-dsns-lviv",name:"ДСНС Львівщини · Telegram",url:"https://t.me/dsns_lviv",category:"Telegram",rss:"https://rsshub.app/telegram/channel/dsns_lviv"},
-{id:"tg-police-lviv",name:"Поліція Львівщини · Telegram",url:"https://t.me/lviv_region_poluce",category:"Telegram",rss:"https://rsshub.app/telegram/channel/lviv_region_poluce"},
-{id:"tg-dsns-tern",name:"ДСНС Тернопільщини",url:"https://t.me/DSNS_TERNOPIL",category:"Telegram",rss:"https://rsshub.app/telegram/channel/DSNS_TERNOPIL"},
-{id:"tg-patrol",name:"Патрульна поліція Львівщини",url:"https://t.me/lvivpatrolpolice",category:"Telegram",rss:"https://rsshub.app/telegram/channel/lvivpatrolpolice"},
-{id:"tg-pgo",name:"Офіс Генерального прокурора",url:"https://t.me/pgo_gov_ua",category:"Telegram",rss:"https://rsshub.app/telegram/channel/pgo_gov_ua"},
-{id:"tg-dsns-rivne",name:"ДСНС Рівненщини",url:"https://t.me/dsns_rivne",category:"Telegram",rss:"https://rsshub.app/telegram/channel/dsns_rivne"},
-{id:"tg-prok-lviv",name:"Львівська обласна прокуратура · Telegram",url:"https://t.me/lvivoblprok",category:"Telegram",rss:"https://rsshub.app/telegram/channel/lvivoblprok"}
-];
-const KEY="newsdesk_sources_v1", STATE="newsdesk_rss_state_v1";
-const savedSources=JSON.parse(localStorage.getItem(KEY)||"null");
-let sources=savedSources?([...defaults.filter(d=>!savedSources.some(s=>s.id===d.id)),...savedSources]):defaults;
-let states=JSON.parse(localStorage.getItem(STATE)||"{}"), editing=null;
-const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function save(){localStorage.setItem(KEY,JSON.stringify(sources));localStorage.setItem(STATE,JSON.stringify(states))}
-function initials(n){return n.split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase()}
+let S={sources:[],items:[],monitor:{},intervalSeconds:60},tab="feed",editingSource=null;
+const $=x=>document.getElementById(x),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function api(u,o={}){const r=await fetch(u,{...o,headers:{"content-type":"application/json",...(o.headers||{})}});let d={};try{d=await r.json()}catch{}if(!r.ok)throw Error(d.error||("HTTP "+r.status));return d}
+function fmt(v){if(!v)return "ще не було";const d=new Date(v);return isNaN(d)?v:d.toLocaleString("uk-UA",{dateStyle:"short",timeStyle:"medium"})}
+function updateMonitor(){const m=S.monitor||{},last=m.last_check_at;$("lastCheck").textContent=last?`Остання фактична перевірка: ${fmt(last)} · наступний плановий запуск — приблизно за 1 хв`:"Worker ще не зафіксував завершену перевірку";$("monitorCount").textContent=last?`Перевірено джерел: ${m.last_check_count||0} · помилок: ${m.last_check_failed||0}`:"Інтервал Cron: 60 с"}
 function render(){
- const q=$("search").value.toLowerCase(), f=$("filter").value, sort=$("sort").value;
- let list=sources.filter(s=>(s.name+" "+s.url).toLowerCase().includes(q)&&(f==="all"||s.category===f));
- if(sort==="new")list.sort((a,b)=>(states[b.id]?.isNew?1:0)-(states[a.id]?.isNew?1:0));
- if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"uk"));
- const groups=["Медіа","Львівщина","Західні області","Telegram","Інше"];
- $("content").innerHTML=groups.map((g,i)=>{
-  const arr=list.filter(s=>s.category===g);if(!arr.length)return "";
-  const icons=["▤","⌂","⌖","➤","＋"];
-  return `<section class="group"><div class="group-head"><div class="group-title"><span class="ico">${icons[i]}</span>${g}<span class="count">${arr.length} джерел</span></div></div><div class="cards">${arr.map(s=>{
-   const st=states[s.id]||{}, isNew=!!st.isNew, monitored=!!s.rss;
-   return `<article class="source ${isNew?"new":""}"><a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" aria-label="Відкрити ${esc(s.name)}"></a><div class="source-icon">${esc(initials(s.name))}</div><div class="source-info"><div class="source-name">${esc(s.name)}</div><div class="source-meta">${monitored?(st.error?"RSS · помилка перевірки":st.checked?"RSS · перевірено":"RSS · очікує перевірки"):"Швидке посилання"}</div></div>${isNew?'<span class="pill new">● NEW</span>':monitored?'<span class="pill">RSS</span>':''}<div class="source-actions"><button class="iconbtn edit" data-id="${esc(s.id)}" title="Редагувати" aria-label="Редагувати">✎</button></div></article>`;
-  }).join("")}</div></section>`;
- }).join("")||'<div class="empty">Нічого не знайдено. Спробуй змінити пошук або додай джерело.</div>';
- $("totalCount").textContent=sources.length;
- $("newCount").textContent=sources.filter(s=>states[s.id]?.isNew).length;
- $("monitorCount").textContent=`RSS: ${sources.filter(s=>s.rss).length} джерело(а)`;
- document.querySelectorAll(".edit").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openEditor(b.dataset.id)}));
+ $("sn").textContent=S.sources.length;$("un").textContent=S.items.filter(x=>!x.is_read).length;$("savedCount").textContent=S.items.filter(x=>x.is_saved).length;updateMonitor();
+ const q=$("q").value.toLowerCase(),cat=$("cat").value;
+ if(tab==="sources"){
+  const list=S.sources.filter(x=>(!cat||x.category===cat)&&(!q||(x.name+" "+x.url+" "+x.category).toLowerCase().includes(q)));
+  $("view").innerHTML='<div class="toolbar-actions"><button class="btn primary" id="addSource">＋ Додати джерело</button></div>'+(list.length?'<div class="grid">'+list.map(x=>`<div class="source"><div class="info"><b>${esc(x.name)}</b><small>${esc(x.category)} · ${esc(x.status_message||"Ще не перевірено")}</small><small>${esc(x.url)}</small></div><span class="badge ${x.status==="ok"?"ok":x.status==="error"?"err":""}">${esc(x.type)}</span><div class="item-actions"><button class="small" data-edit-source="${esc(x.id)}" title="Редагувати">✎</button><button class="small" data-delete-source="${esc(x.id)}" title="Видалити">×</button><a class="small" href="${esc(x.url)}" target="_blank" rel="noopener">↗</a></div></div>`).join("")+'</div>':'<div class="empty">Джерел не знайдено.</div>');
+  $("addSource").onclick=()=>openSource();document.querySelectorAll("[data-edit-source]").forEach(b=>b.onclick=()=>openSource(b.dataset.editSource));document.querySelectorAll("[data-delete-source]").forEach(b=>b.onclick=()=>deleteSource(b.dataset.deleteSource));return;
+ }
+ const items=S.items.filter(x=>(tab!=="saved"||x.is_saved)&&(!cat||x.category===cat)&&(!q||(x.title+" "+x.source_name+" "+x.summary).toLowerCase().includes(q)));
+ let actions=tab==="feed"?`<div class="toolbar-actions"><button class="btn" id="markAll">✓ Позначити всі як прочитані</button><button class="btn danger" id="deleteRead">Видалити прочитані</button></div>`:`<div class="toolbar-actions"><button class="btn danger" id="deleteRead">Видалити прочитані</button></div>`;
+ $("view").innerHTML=actions+(items.length?'<div class="feed">'+items.map(x=>`<article class="item ${x.is_read?"":"unread"}"><div class="body"><div class="meta">${esc(x.source_name)} · ${esc(x.category)} · ${esc(fmt(x.published_at||x.created_at))}</div><h3>${esc(x.title)}</h3><p>${esc(x.summary)}</p><a href="${esc(x.url)}" target="_blank" rel="noopener">Відкрити оригінал ↗</a></div><div class="item-actions"><button class="small" data-read="${esc(x.id)}" title="Позначити прочитаною">${x.is_read?"✓":"○"}</button><button class="small" data-save="${esc(x.id)}" title="Зберегти">${x.is_saved?"★":"☆"}</button><button class="small" data-delete-item="${esc(x.id)}" title="Видалити новину">×</button></div></article>`).join("")+'</div>':'<div class="empty">Публікацій не знайдено.</div>');
+ $("markAll")?.addEventListener("click",markAllRead);$("deleteRead").onclick=deleteRead;
+ document.querySelectorAll("[data-read]").forEach(b=>b.onclick=async()=>{try{await api("/api/items/"+encodeURIComponent(b.dataset.read)+"/read",{method:"POST"});await load()}catch(e){alert(e.message)}});
+ document.querySelectorAll("[data-save]").forEach(b=>b.onclick=async()=>{try{await api("/api/items/"+encodeURIComponent(b.dataset.save)+"/save",{method:"POST"});await load()}catch(e){alert(e.message)}});
+ document.querySelectorAll("[data-delete-item]").forEach(b=>b.onclick=async()=>{const item=S.items.find(x=>x.id===b.dataset.deleteItem);if(!confirm(`Видалити цю новину?\n\n${item?.title||""}`))return;try{await api("/api/items/"+encodeURIComponent(b.dataset.deleteItem),{method:"DELETE"});await load()}catch(e){alert(e.message)}});
 }
-function openEditor(id=null){
- editing=id;const s=id?sources.find(x=>x.id===id):null;
- $("modalTitle").textContent=s?"Редагувати джерело":"Додати джерело";
- $("name").value=s?.name||"";$("url").value=s?.url||"";$("category").value=s?.category||"Медіа";$("rss").value=s?.rss||"";
- $("editor").showModal();
-}
-$("addBtn").onclick=()=>openEditor();$("cancelBtn").onclick=()=>$("editor").close();
-$("sourceForm").onsubmit=e=>{
- e.preventDefault();const item={id:editing||("custom-"+Date.now()),name:$("name").value.trim(),url:$("url").value.trim(),category:$("category").value,rss:$("rss").value.trim()};
- if(editing){sources=sources.map(s=>s.id===editing?item:s)}else sources.push(item);
- save();$("editor").close();render();if(item.rss)checkOne(item,true);
-};
-$("search").addEventListener("input",render);$("filter").addEventListener("change",render);$("sort").addEventListener("change",render);
-async function checkOne(s,manual=false){
- if(!s.rss)return;
- const st=states[s.id]||{};
- try{
-  const api="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(s.rss);
-  const res=await fetch(api,{cache:"no-store"});if(!res.ok)throw Error("HTTP "+res.status);
-  const data=await res.json();if(data.status!=="ok"||!data.items?.length)throw Error(data.message||"RSS недоступний");
-  const newest=data.items[0], key=newest.guid||newest.link||newest.title;
-  if(st.lastKey&&st.lastKey!==key)st.isNew=true;
-  if(!st.lastKey)st.isNew=false;
-  st.lastKey=key;st.checked=new Date().toISOString();st.error=false;st.latestTitle=newest.title||"";
-  states[s.id]=st;save();
- }catch(err){st.error=true;st.checked=new Date().toISOString();st.errorText=err.message;states[s.id]=st;save()}
-}
-let checking=false;
-async function checkAll(){
- if(checking)return;checking=true;$("liveDot").classList.add("live");$("lastCheck").textContent="Перевіряю RSS-джерела…";
- const monitored=sources.filter(s=>s.rss);
- await Promise.all(monitored.map(s=>checkOne(s)));
- $("lastCheck").textContent="Остання перевірка: "+new Date().toLocaleTimeString("uk-UA",{hour:"2-digit",minute:"2-digit",second:"2-digit"})+" · наступна через 60 с";
- $("liveDot").classList.remove("live");checking=false;render();
-}
-$("checkBtn").onclick=checkAll;
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkAll()});
-render();checkAll();setInterval(checkAll,60000);
-</script>
-</body>
-</html>
+async function load(){try{S=await api("/api/state");render()}catch(e){$("view").innerHTML='<div class="empty">Не вдалося підключитися до D1. Перевір Worker та налаштування бази даних.</div>';}}
+async function markAllRead(){const n=S.items.filter(x=>!x.is_read).length;if(!n)return alert("Усі новини вже прочитані.");if(!confirm(`Позначити як прочитані всі ${n} новин?`))return;try{await api("/api/items/mark-all-read",{method:"POST"});await load()}catch(e){alert(e.message)}}
+async function deleteRead(){const n=S.items.filter(x=>x.is_read&&!x.is_saved).length;const saved=S.items.filter(x=>x.is_read&&x.is_saved).length;if(!n)return alert("Немає прочитаних новин для видалення (збережені новини залишаються).");if(!confirm(`Видалити ${n} прочитаних новин?\n\nЗбережені новини (${saved}) залишаться. Непрочитані новини не буде видалено.`))return;try{const r=await api("/api/items/delete-read",{method:"DELETE"});alert(`Видалено: ${r.deleted}`);await load()}catch(e){alert(e.message)}}
+async function deleteSource(id){const s=S.sources.find(x=>x.id===id);if(!confirm(`Видалити джерело «${s?.name||id}»?\n\nІсторія вже отриманих новин залишиться у стрічці.`))return;try{await api("/api/sources/"+encodeURIComponent(id),{method:"DELETE"});await load()}catch(e){alert(e.message)}}
+function updateTypeFields(){const t=$("sType").value;$("handleRow").style.display=t==="telegram"?"block":"none";$("feedRow").style.display=t==="rss"?"block":"none"}
+function openSource(id=null){editingSource=id;const s=S.sources.find(x=>x.id===id);$("sourceTitle").textContent=s?"Редагувати джерело":"Додати джерело";$("sName").value=s?.name||"";$("sUrl").value=s?.url||"";$("sCategory").value=s?.category||"Медіа";$("sType").value=s?.type||"rss";$("sHandle").value=s?.handle||"";$("sFeed").value=s?.feed_url||"";$("sEnabled").checked=s?s.enabled!==0:true;updateTypeFields();$("sourceDialog").showModal()}
+$("sType").onchange=updateTypeFields;$("cancelSource").onclick=()=>$("sourceDialog").close();
+$("sourceForm").onsubmit=async e=>{e.preventDefault();const b={name:$("sName").value.trim(),url:$("sUrl").value.trim(),category:$("sCategory").value.trim(),type:$("sType").value,handle:$("sHandle").value.trim(),feedUrl:$("sFeed").value.trim(),enabled:$("sEnabled").checked};try{await api(editingSource?"/api/sources/"+encodeURIComponent(editingSource):"/api/sources",{method:editingSource?"PUT":"POST",body:JSON.stringify(b)});$("sourceDialog").close();await load()}catch(err){alert(err.message)}};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));render()});
+$("q").oninput=render;$("cat").onchange=render;
+$("check").onclick=async()=>{const b=$("check");b.disabled=true;b.textContent="Перевіряю…";try{await api("/api/check",{method:"POST"});setTimeout(load,2500);setTimeout(()=>{b.disabled=false;b.textContent="↻ Перевірити зараз"},3000)}catch(e){alert(e.message);b.disabled=false;b.textContent="↻ Перевірити зараз"}};
+load();setInterval(load,15000);
+</script></body></html>
