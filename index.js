@@ -39,7 +39,9 @@ function parseRss(xml, source) {
     let link=tag("link");
     if (!link) link=b.match(/<link[^>]+href=["']([^"']+)["']/i)?.[1]||"";
     const guid=tag("guid")||tag("id")||link||title;
-    const publishedAt=tag("pubDate")||tag("published")||tag("updated")||nowISO();
+    const rawPublishedAt=tag("pubDate")||tag("published")||tag("updated")||"";
+    const parsedPublishedAt=rawPublishedAt?new Date(rawPublishedAt):null;
+    const publishedAt=parsedPublishedAt&&!Number.isNaN(parsedPublishedAt.getTime())?parsedPublishedAt.toISOString():nowISO();
     const summary=tag("description")||tag("summary")||"";
     if (title&&link) out.push({guid,title,url:new URL(link,source.url).href,publishedAt,summary:summary.slice(0,350)});
   }
