@@ -1,0 +1,280 @@
+[
+  {
+    "id": "zaxid",
+    "name": "ZAXID.NET",
+    "category": "Медіа",
+    "type": "rss",
+    "url": "https://zaxid.net/",
+    "feedUrl": "",
+    "enabled": true
+  },
+  {
+    "id": "nta",
+    "name": "NTA",
+    "category": "Медіа",
+    "type": "rss",
+    "url": "https://nta.ua/",
+    "feedUrl": "",
+    "enabled": true
+  },
+  {
+    "id": "city",
+    "name": "Львівська міська рада",
+    "category": "Львівщина",
+    "type": "rss",
+    "url": "https://city-adm.lviv.ua/news/",
+    "feedUrl": "",
+    "enabled": true
+  },
+  {
+    "id": "lvivmedia",
+    "name": "Львів Медіа",
+    "category": "Медіа",
+    "type": "rss",
+    "url": "https://lviv.media/",
+    "feedUrl": "",
+    "enabled": true
+  },
+  {
+    "id": "suspilne",
+    "name": "Суспільне",
+    "category": "Медіа",
+    "type": "rss",
+    "url": "https://suspilne.media/",
+    "feedUrl": "",
+    "enabled": true
+  },
+  {
+    "id": "tg-lvivych_news",
+    "name": "Львівич",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "lvivych_news",
+    "url": "https://t.me/lvivych_news",
+    "enabled": true
+  },
+  {
+    "id": "tg-lviv_lmbrg",
+    "name": "LEMBERG",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "lviv_lmbrg",
+    "url": "https://t.me/lviv_lmbrg",
+    "enabled": true
+  },
+  {
+    "id": "tg-lv1256",
+    "name": "Так люблю той Львів",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "Lv1256",
+    "url": "https://t.me/Lv1256",
+    "enabled": true
+  },
+  {
+    "id": "tg-kozytskyy_maksym_official",
+    "name": "Максим Козицький",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "kozytskyy_maksym_official",
+    "url": "https://t.me/kozytskyy_maksym_official",
+    "enabled": true
+  },
+  {
+    "id": "tg-people_of_action",
+    "name": "People of Action",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "people_of_action",
+    "url": "https://t.me/people_of_action",
+    "enabled": true
+  },
+  {
+    "id": "tg-v_zelenskiy_official",
+    "name": "Володимир Зеленський",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "V_Zelenskiy_official",
+    "url": "https://t.me/V_Zelenskiy_official",
+    "enabled": true
+  },
+  {
+    "id": "tg-oleksandrkoval_rv",
+    "name": "Олександр Коваль",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "oleksandrkoval_rv",
+    "url": "https://t.me/oleksandrkoval_rv",
+    "enabled": true
+  },
+  {
+    "id": "tg-zinkevich_igor",
+    "name": "Ігор Зінкевич",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "zinkevich_igor",
+    "url": "https://t.me/zinkevich_igor",
+    "enabled": true
+  },
+  {
+    "id": "tg-lviv_adm",
+    "name": "Львівська міська рада",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "lviv_adm",
+    "url": "https://t.me/lviv_adm",
+    "enabled": true
+  },
+  {
+    "id": "tg-centercounteringdisinformation",
+    "name": "Центр протидії дезінформації",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "CenterCounteringDisinformation",
+    "url": "https://t.me/CenterCounteringDisinformation",
+    "enabled": true
+  },
+  {
+    "id": "tg-dsns_lviv",
+    "name": "ДСНС Львівщини",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "dsns_lviv",
+    "url": "https://t.me/dsns_lviv",
+    "enabled": true
+  },
+  {
+    "id": "tg-lviv_region_poluce",
+    "name": "Поліція Львівщини",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "lviv_region_poluce",
+    "url": "https://t.me/lviv_region_poluce",
+    "enabled": true
+  },
+  {
+    "id": "tg-dsns_ternopil",
+    "name": "ДСНС Тернопільщини",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "DSNS_TERNOPIL",
+    "url": "https://t.me/DSNS_TERNOPIL",
+    "enabled": true
+  },
+  {
+    "id": "tg-lvivpatrolpolice",
+    "name": "Патрульна поліція Львівщини",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "lvivpatrolpolice",
+    "url": "https://t.me/lvivpatrolpolice",
+    "enabled": true
+  },
+  {
+    "id": "tg-pgo_gov_ua",
+    "name": "Офіс Генерального прокурора",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "pgo_gov_ua",
+    "url": "https://t.me/pgo_gov_ua",
+    "enabled": true
+  },
+  {
+    "id": "tg-dsns_rivne",
+    "name": "ДСНС Рівненщини",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "dsns_rivne",
+    "url": "https://t.me/dsns_rivne",
+    "enabled": true
+  },
+  {
+    "id": "tg-lvivoblprok",
+    "name": "Львівська обласна прокуратура",
+    "category": "Telegram",
+    "type": "telegram",
+    "handle": "lvivoblprok",
+    "url": "https://t.me/lvivoblprok",
+    "enabled": true
+  },
+  {
+    "id": "fb-dsns",
+    "name": "ДСНС Львівщини",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/LVIVDSNS",
+    "enabled": true
+  },
+  {
+    "id": "fb-prok-lviv",
+    "name": "Львівська обласна прокуратура",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/lviv.gp.gov.ua?locale=uk_UA",
+    "enabled": true
+  },
+  {
+    "id": "fb-police-lviv",
+    "name": "Поліція Львівської області",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/police.lviv.region?locale=uk_UA",
+    "enabled": true
+  },
+  {
+    "id": "fb-police-zak",
+    "name": "Поліція Закарпаття",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/UA.ZakarpattyaPolice?locale=uk_UA",
+    "enabled": true
+  },
+  {
+    "id": "fb-prok-zak",
+    "name": "Закарпатська обласна прокуратура",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/zakprokuratura?locale=uk_UA",
+    "enabled": true
+  },
+  {
+    "id": "fb-100070918698861",
+    "name": "Facebook · сторінка 100070918698861",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/profile.php?id=100070918698861&locale=uk_UA",
+    "enabled": true
+  },
+  {
+    "id": "fb-police-rivne",
+    "name": "Поліція Рівненщини",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/police.in.Rivne.region",
+    "enabled": true
+  },
+  {
+    "id": "fb-police-tern",
+    "name": "Поліція Тернопільщини",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/gynp.ternopil",
+    "enabled": true
+  },
+  {
+    "id": "fb-100064561967246",
+    "name": "Facebook · сторінка 100064561967246",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/profile.php?id=100064561967246",
+    "enabled": true
+  },
+  {
+    "id": "fb-customs",
+    "name": "Львівська митниця",
+    "category": "Facebook",
+    "type": "link",
+    "url": "https://www.facebook.com/LVcustomsUA",
+    "enabled": true
+  }
+]
