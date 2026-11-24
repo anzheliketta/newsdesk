@@ -104,14 +104,21 @@ async function rememberDeleted(env,ids) {
 async function recordItems(env,source,items) {
   const baseline=await env.DB.prepare("SELECT value FROM settings WHERE key=?").bind("baseline:"+source.id).first();
   const suppressed=await suppressedIds(env);
-  let added=0;
+  const statements=[];
   for (const it of items) {
     const itemId=source.id+":"+it.guid;
     if (suppressed.has(itemId)) continue;
-    const r=await env.DB.prepare(
+    statements.push(env.DB.prepare(
       "INSERT OR IGNORE INTO items(id,source_id,source_name,category,title,url,summary,published_at,created_at) VALUES(?,?,?,?,?,?,?,?,?)"
-    ).bind(itemId,source.id,source.name,source.category,it.title,it.url,it.summary,it.publishedAt,nowISO()).run();
-    if (baseline && r.meta.changes) added++;
+    ).bind(itemId,source.id,source.name,source.category,it.title,it.url,it.summary,it.publishedAt,nowISO()));
+  }
+
+  // D1 batch executes many inserts with far fewer Worker subrequests than
+  // awaiting one .run() for every item.
+  let added=0;
+  for (let i=0;i<statements.length;i+=100) {
+    const results=await env.DB.batch(statements.slice(i,i+100));
+    if (baseline) added+=results.reduce((sum,r)=>sum+(r.meta?.changes||0),0);
   }
   if (!baseline) await setting(env,"baseline:"+source.id,nowISO());
   return added;
