@@ -25,8 +25,15 @@ function decodeXml(s="") {
 function xmlValue(block, tag) {
   const re = new RegExp("<(?:[\\w.-]+:)?"+tag+"(?:\\s[^>]*)?>([\\s\\S]*?)<\\/(?:[\\w.-]+:)?"+tag+"\\s*>","i");
   const m=block.match(re);
-  if (m) return decodeXml(m[1].replace(/<[^>]*>/g," ").trim());
-  return "";
+  if (!m) return "";
+  // Decode CDATA/entities first, then strip embedded HTML so RSS snippets
+  // never expose markup such as image tags in the editorial feed.
+  return decodeXml(m[1])
+    .replace(/<script[\\s\\S]*?<\\/script>/gi," ")
+    .replace(/<style[\\s\\S]*?<\\/style>/gi," ")
+    .replace(/<[^>]*>/g," ")
+    .replace(/\\s+/g," ")
+    .trim();
 }
 function parseTelegram(html, source) {
   const found = [];
