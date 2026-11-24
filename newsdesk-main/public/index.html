@@ -17,15 +17,15 @@ dialog{border:0;border-radius:18px;padding:0;width:min(520px,calc(100% - 24px));
 <div class="monitor"><span class="dot"></span><span id="lastCheck">Завантаження статусу моніторингу…</span><span id="monitorCount"></span></div>
 <section class="hero"><div><h2>Твоя редакційна панель</h2><div class="muted">Нові публікації та швидкий доступ до першоджерел</div></div><div class="stats"><div><b id="sn">—</b><small>джерел</small></div><div><b id="un">—</b><small>непрочитаних</small></div><div><b id="savedCount">—</b><small>збережених</small></div></div></section>
 <nav class="tabs"><button class="tab active" data-tab="feed">Стрічка</button><button class="tab" data-tab="sources">Джерела</button><button class="tab" data-tab="saved">Збережене</button></nav>
-<div class="tools"><input id="q" placeholder="Пошук новин або джерел"><select id="cat"><option value="">Усі категорії</option><option>Telegram</option><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Facebook</option><option>Інше</option></select></div>
+<div class="tools"><input id="q" placeholder="Пошук новин або джерел"><select id="cat"><option value="">Усі категорії</option><option>Telegram</option><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Інше</option></select></div>
 <div id="view"><div class="empty">Завантаження…</div></div>
-<p class="muted" style="font-size:11px;margin-top:20px">Cron запускається щохвилини. Час останньої перевірки та кількість джерел показані за фактичним завершеним проходом Worker. Facebook наразі працює як швидке посилання.</p>
+<p class="muted" style="font-size:11px;margin-top:20px">Cron запускається щохвилини. Час останньої перевірки та кількість джерел показані за фактичним завершеним проходом Worker. Моніторинг охоплює лише Telegram та RSS/медіа.</p>
 </div>
 <dialog id="sourceDialog"><form class="modal" id="sourceForm"><h3 id="sourceTitle">Додати джерело</h3>
 <div class="fieldrow"><label for="sName">Назва</label><input class="field" id="sName" required></div>
 <div class="fieldrow"><label for="sUrl">Посилання</label><input class="field" id="sUrl" type="url" placeholder="https://…" required></div>
 <div class="fieldrow"><label for="sCategory">Категорія</label><input class="field" id="sCategory" list="categories" required placeholder="Наприклад, Львівщина"><datalist id="categories"><option>Telegram</option><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Facebook</option><option>Інше</option></datalist></div>
-<div class="fieldrow"><label for="sType">Тип джерела</label><select class="field" id="sType"><option value="rss">RSS / сайт</option><option value="telegram">Telegram</option><option value="link">Лише посилання</option></select></div>
+<div class="fieldrow"><label for="sType">Тип джерела</label><select class="field" id="sType"><option value="rss">RSS / сайт</option><option value="telegram">Telegram</option></select></div>
 <div class="fieldrow" id="handleRow"><label for="sHandle">Telegram username</label><input class="field" id="sHandle" placeholder="@channel_name"></div>
 <div class="fieldrow" id="feedRow"><label for="sFeed">RSS URL (необов’язково)</label><input class="field" id="sFeed" type="url" placeholder="https://…/rss.xml"><div class="hint">Якщо сайт не знаходить RSS автоматично, встав точну адресу стрічки.</div></div>
 <label class="checkbox"><input type="checkbox" id="sEnabled" checked> Увімкнути моніторинг (для RSS / Telegram)</label>
