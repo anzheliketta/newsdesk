@@ -167,14 +167,14 @@ async function poll(env) {
   await setting(env,"last_check_started_at",started);
   const {results}=await env.DB.prepare("SELECT * FROM sources WHERE enabled=1 AND type IN ('telegram','rss') ORDER BY id").all();
 
-  // Process three sources per cron invocation: faster coverage while
+  // Process six sources per cron invocation: faster coverage while
   // keeping each invocation below the Worker subrequest budget.
   const previous=await env.DB.prepare("SELECT value FROM settings WHERE key='poll_cursor'").first();
   const previousId=previous?.value||"";
   const previousIndex=results.findIndex(s=>s.id===previousId);
   const start=(previousIndex+1+results.length)%Math.max(results.length,1);
   const selected=results.length
-    ? Array.from({length:Math.min(3,results.length)},(_,i)=>results[(start+i)%results.length])
+    ? Array.from({length:Math.min(6,results.length)},(_,i)=>results[(start+i)%results.length])
     : [];
 
   let checked=0, failed=0;
