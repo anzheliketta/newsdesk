@@ -167,7 +167,7 @@ async function poll(env) {
   await setting(env,"last_check_started_at",started);
   const {results}=await env.DB.prepare("SELECT * FROM sources WHERE enabled=1 AND type IN ('telegram','rss') ORDER BY id").all();
 
-  // Process six sources per cron invocation: faster coverage while
+  // Process up to eight sources per cron invocation: faster coverage while
   // keeping each invocation below the Worker subrequest budget.
   const previous=await env.DB.prepare("SELECT value FROM settings WHERE key='poll_cursor'").first();
   const previousId=previous?.value||"";
@@ -199,7 +199,7 @@ async function parseBody(request) {
 }
 function validSource(b) {
   return b && typeof b.name==="string" && b.name.trim() && typeof b.url==="string" && /^https?:\/\//i.test(b.url)
-    && typeof b.category==="string" && b.category.trim() && ["rss","telegram"].includes(b.type);
+    && typeof b.category==="string" && b.category.trim() && ["rss","telegram","link"].includes(b.type);
 }
 export default {
   async fetch(request,env,ctx) {
@@ -209,7 +209,7 @@ export default {
       if (url.pathname==="/api/health") return json({ok:true,now:nowISO()});
       if (url.pathname==="/api/state") {
         const [sources,items,monitor]=await Promise.all([
-          env.DB.prepare("SELECT * FROM sources WHERE type IN ('telegram','rss') ORDER BY CASE category WHEN 'Telegram' THEN 1 WHEN 'Медіа' THEN 2 ELSE 3 END,name").all(),
+          env.DB.prepare("SELECT * FROM sources ORDER BY CASE category WHEN 'Telegram' THEN 1 WHEN 'Медіа' THEN 2 ELSE 3 END,name").all(),
           env.DB.prepare("SELECT * FROM items ORDER BY created_at DESC LIMIT 1000").all(),
           readSettings(env)
         ]);
