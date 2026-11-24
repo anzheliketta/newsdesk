@@ -174,7 +174,7 @@ async function poll(env) {
   const previousIndex=results.findIndex(s=>s.id===previousId);
   const start=(previousIndex+1+results.length)%Math.max(results.length,1);
   const selected=results.length
-    ? Array.from({length:Math.min(6,results.length)},(_,i)=>results[(start+i)%results.length])
+    ? Array.from({length:Math.min(8,results.length)},(_,i)=>results[(start+i)%results.length])
     : [];
 
   let checked=0, failed=0;
@@ -199,7 +199,7 @@ async function parseBody(request) {
 }
 function validSource(b) {
   return b && typeof b.name==="string" && b.name.trim() && typeof b.url==="string" && /^https?:\/\//i.test(b.url)
-    && typeof b.category==="string" && b.category.trim() && ["rss","telegram","link"].includes(b.type);
+    && typeof b.category==="string" && b.category.trim() && ["rss","telegram"].includes(b.type);
 }
 export default {
   async fetch(request,env,ctx) {
@@ -209,7 +209,7 @@ export default {
       if (url.pathname==="/api/health") return json({ok:true,now:nowISO()});
       if (url.pathname==="/api/state") {
         const [sources,items,monitor]=await Promise.all([
-          env.DB.prepare("SELECT * FROM sources ORDER BY CASE category WHEN 'Telegram' THEN 1 WHEN 'Медіа' THEN 2 ELSE 3 END,name").all(),
+          env.DB.prepare("SELECT * FROM sources WHERE type IN ('telegram','rss') ORDER BY CASE category WHEN 'Telegram' THEN 1 WHEN 'Медіа' THEN 2 ELSE 3 END,name").all(),
           env.DB.prepare("SELECT * FROM items ORDER BY created_at DESC LIMIT 1000").all(),
           readSettings(env)
         ]);
