@@ -60,12 +60,12 @@ async function fetchTelegramItems(source) {
 }
 function parseRss(xml, source) {
   const out=[];
-  const blocks=[...xml.matchAll(/<(?:[\\w.-]+:)?(item|entry)\\b[\\s\\S]*?<\\/(?:[\\w.-]+:)?\\1\\s*>/gi)];
+  const blocks=[...xml.matchAll(/<(?:[\w.-]+:)?(item|entry)\b[\s\S]*?<\/(?:[\w.-]+:)?\1\s*>/gi)];
   for (const m of blocks) {
     const b=m[0];
     const title=xmlValue(b,"title");
     let link=xmlValue(b,"link");
-    if (!link) link=b.match(/<(?:[\\w.-]+:)?link[^>]+href=["']([^"']+)["']/i)?.[1]||"";
+    if (!link) link=b.match(/<(?:[\w.-]+:)?link[^>]+href=["']([^"']+)["']/i)?.[1]||"";
     const guid=xmlValue(b,"guid")||xmlValue(b,"id")||link||title;
     const raw=xmlValue(b,"pubDate")||xmlValue(b,"published")||xmlValue(b,"updated")||xmlValue(b,"date");
     const parsed=raw?new Date(raw):null;
@@ -79,7 +79,7 @@ function parseRss(xml, source) {
 }
 function rssCandidates(source, html="") {
   const urls=[];
-  const links=[...html.matchAll(/<link\\b([^>]+)>/gi)];
+  const links=[...html.matchAll(/<link\b([^>]+)>/gi)];
   for (const [,attrs] of links) {
     const type=attrs.match(/type=["']([^"']+)["']/i)?.[1]||"";
     const href=attrs.match(/href=["']([^"']+)["']/i)?.[1];
@@ -89,7 +89,7 @@ function rssCandidates(source, html="") {
   }
   const base=new URL(source.url);
   for (const p of ["/feed","/rss","/rss.xml","/feed.xml","/atom.xml"]) urls.push(new URL(p,base.origin).href);
-  const domain=base.hostname.replace(/^www\\./,"");
+  const domain=base.hostname.replace(/^www\./,"");
   urls.push("https://news.google.com/rss/search?q="+encodeURIComponent("site:"+domain)+"&hl=uk&gl=UA&ceid=UA:uk");
   return [...new Set(urls)];
 }
