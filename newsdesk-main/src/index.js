@@ -116,19 +116,15 @@ async function recordItems(env,source,items) {
   const baseline=await env.DB.prepare("SELECT value FROM settings WHERE key=?").bind("baseline:"+source.id).first();
   const suppressed=await suppressedIds(env);
   let added=0;
-  if (!baseline) {
-    for (const it of items) await env.DB.prepare(
-      "INSERT OR IGNORE INTO items(id,source_id,source_name,category,title,url,summary,published_at,created_at) VALUES(?,?,?,?,?,?,?,?,?)"
-    ).bind(source.id+":"+it.guid,source.id,source.name,source.category,it.title,it.url,it.summary,it.publishedAt,nowISO()).run();
-    await setting(env,"baseline:"+source.id,nowISO());
-    return 0;
-  }
   for (const it of items) {
+    const itemId=source.id+":"+it.guid;
+    if (suppressed.has(itemId)) continue;
     const r=await env.DB.prepare(
       "INSERT OR IGNORE INTO items(id,source_id,source_name,category,title,url,summary,published_at,created_at) VALUES(?,?,?,?,?,?,?,?,?)"
     ).bind(itemId,source.id,source.name,source.category,it.title,it.url,it.summary,it.publishedAt,nowISO()).run();
-    if (r.meta.changes) added++;
+    if (baseline && r.meta.changes) added++;
   }
+  if (!baseline) await setting(env,"baseline:"+source.id,nowISO());
   return added;
 }
 async function checkSource(env,s) {
