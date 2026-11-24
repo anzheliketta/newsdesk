@@ -43,20 +43,9 @@ function parseTelegram(html, source) {
   return found;
 }
 async function fetchTelegramItems(source) {
-  const all=new Map();
-  let before=null;
-  for (let page=0; page<5; page++) {
-    const url="https://t.me/s/"+encodeURIComponent(source.handle)+(before?"?before="+encodeURIComponent(before):"");
-    const html=await getText(url);
-    const batch=parseTelegram(html,source);
-    for (const item of batch) all.set(item.guid,item);
-    const ids=[...html.matchAll(/data-post=["'][^/"']+\/(\d+)["']/gi)].map(x=>Number(x[1])).filter(Number.isFinite);
-    if (!ids.length || batch.length===0) break;
-    const oldest=Math.min(...ids);
-    if (!oldest || oldest===before) break;
-    before=oldest;
-  }
-  return [...all.values()];
+  // One page per invocation keeps Telegram polling within the Workers subrequest budget.
+  const html=await getText("https://t.me/s/"+encodeURIComponent(source.handle));
+  return parseTelegram(html,source);
 }
 function parseRss(xml, source) {
   const out=[];
@@ -170,14 +159,25 @@ async function poll(env) {
   const started=nowISO();
   await setting(env,"last_check_started_at",started);
   const {results}=await env.DB.prepare("SELECT * FROM sources WHERE enabled=1 AND type IN ('telegram','rss') ORDER BY id").all();
+
+  // Process only two sources per cron invocation. This spreads work over time and
+  // prevents one Worker invocation from exhausting its subrequest allowance.
+  const previous=await env.DB.prepare("SELECT value FROM settings WHERE key='poll_cursor'").first();
+  const previousId=previous?.value||"";
+  const previousIndex=results.findIndex(s=>s.id===previousId);
+  const start=(previousIndex+1+results.length)%Math.max(results.length,1);
+  const selected=results.length
+    ? [results[start],results[(start+1)%results.length]].filter(Boolean)
+    : [];
+
   let checked=0, failed=0;
-  for (let i=0;i<results.length;i+=4) {
-    const batch=await Promise.all(results.slice(i,i+4).map(s=>checkSource(env,s)));
-    for (const result of batch) {
-      if (result.checked) checked++;
-      if (!result.ok) failed++;
-    }
+  for (const source of selected) {
+    const result=await checkSource(env,source);
+    if (result.checked) checked++;
+    if (!result.ok) failed++;
   }
+  if (selected.length) await setting(env,"poll_cursor",selected[selected.length-1].id);
+
   const finished=nowISO();
   await setting(env,"last_check_at",finished);
   await setting(env,"last_check_count",checked);
