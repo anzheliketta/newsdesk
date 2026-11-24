@@ -144,7 +144,9 @@ async function checkSource(env,s) {
         try {
           const xml=await getText(candidate);
           const parsed=parseRss(xml,s);
-          if (!parsed.length) throw new Error("У стрічці немає розпізнаних публікацій");
+          if (!parsed.length && !/<(?:[\\w.-]+:)?(?:rss|feed|RDF)\\b/i.test(xml)) {
+            throw new Error("Відповідь не схожа на коректну RSS/Atom-стрічку");
+          }
           items=parsed; feed=candidate; break;
         } catch(e) { lastError=String(e.message||e); }
       }
