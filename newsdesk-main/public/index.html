@@ -19,7 +19,7 @@ dialog{border:0;border-radius:18px;padding:0;width:min(520px,calc(100% - 24px));
 <nav class="tabs"><button class="tab active" data-tab="feed">Стрічка</button><button class="tab" data-tab="sources">Джерела</button><button class="tab" data-tab="saved">Збережене</button></nav>
 <div class="tools"><input id="q" placeholder="Пошук новин або джерел"><select id="cat"><option value="">Усі категорії</option><option>Telegram</option><option>Медіа</option><option>Львівщина</option><option>Західні області</option><option>Facebook</option><option>Інше</option></select></div>
 <div id="view"><div class="empty">Завантаження…</div></div>
-<p class="muted" style="font-size:11px;margin-top:20px">Cron запускається щохвилини. Час останньої перевірки та кількість джерел показані за фактичним завершеним проходом Worker. Facebook наразі працює як швидке посилання.</p>
+<p class="muted" style="font-size:11px;margin-top:20px">Cron запускається щохвилини. Час останньої перевірки та кількість джерел показані за фактичним завершеним проходом Worker. Автоматичний моніторинг охоплює Telegram та RSS/медіа; Facebook та інші посилання доступні як швидкі посилання.</p>
 </div>
 <dialog id="sourceDialog"><form class="modal" id="sourceForm"><h3 id="sourceTitle">Додати джерело</h3>
 <div class="fieldrow"><label for="sName">Назва</label><input class="field" id="sName" required></div>
